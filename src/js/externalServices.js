@@ -15,7 +15,6 @@ export default class ExternalServices {
   async getRecipes(query) {
     try {
       const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${this.apiKey}&query=${query}`);
-      console.log(response.url)
       const data = await convertToJson(response);
       return data.results;
     } catch (err) {
