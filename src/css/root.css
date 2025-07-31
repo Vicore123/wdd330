@@ -1,0 +1,16 @@
+:root {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+
+  --primary-color: #D94A38;
+  --secondary-color: #F4E7D3;
+  --accent-color: #6C9A8B;
+  
+  background-color: #FAFAFA;
+  color: #333333;
+}
+*{
+  padding: 0rem;
+  margin: 0rem;
+  text-decoration: none;
+}

@@ -1,0 +1,44 @@
+@import './root.css';
+
+header {
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+
+  #header-icon {
+    width: 4rem;
+  }
+  #favorites {
+    width: 2rem;
+  }
+  input[type="text"] {
+    width: 75%;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+
+    border: none;
+    border-radius: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    
+    height: 3rem;
+    #header-icon {
+      display: none;
+    }
+
+    #favorites {
+      margin-left: 1rem;
+    }
+  }
+}
+
+footer {
+  background-color: var(--accent-color);
+  padding: 1rem;
+  img {
+    width: 3rem;
+  }
+}
