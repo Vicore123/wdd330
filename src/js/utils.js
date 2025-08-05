@@ -4,7 +4,7 @@ async function loadTemplate(path) {
   return template;
 }
 
-function renderWithTemplate(template, parentElement, data, callback) {
+export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
   if (callback) {
     callback(data);

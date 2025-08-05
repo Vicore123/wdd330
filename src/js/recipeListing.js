@@ -3,9 +3,11 @@ import renderListWithTemplate from "./utils"
 function recipeCardTemplate(recipe) {
   return `
     <li>
-      <button id="add-favorites"><img src="../images/favorite.png" alt="add to favorites"></button>
-      <h2>${recipe.title}</h2>
-      <img src="${recipe.image}" alt="${recipe.title}">
+      <a href="../../recipe.html?id=${recipe.id}" class="card-link">
+        <h2>${recipe.title}</h2>
+        <button id="add-favorites"><img src="../images/favorite.png" alt="add to favorites"></button>
+        <img src="${recipe.image}" alt="${recipe.title}">
+      </a>
     </li>
   `
 }
@@ -29,11 +31,11 @@ export default class RecipeListing {
   }
 
   renderList(list) {
-    const oldList = this.listElement.querySelector("ul")
-    if (oldList) oldList.remove()
+    // const oldList = this.listElement.querySelector("ul")
+    // if (oldList) oldList.remove()
 
     const productList = document.createElement("ul");
-    productList.classList.add("discovery")
+    productList.classList.add("listing")
     renderListWithTemplate(recipeCardTemplate, productList, list, this.quantity)
     this.listElement.appendChild(productList);
   }

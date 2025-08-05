@@ -1,31 +1,31 @@
 @import './root.css';
 
 
-.discovery {
+.listing {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  li {
-    /* position: relative; */
+  a {
+    color: #333333;
     width: 20rem;
     padding: 1rem;
     margin: 1rem;
+    display: grid;
+    align-items: start;
+    grid-template-columns: 15rem 5rem;
+    grid-template-rows: 3.5rem;
 
     #add-favorites {
       border: none;
       background-color: #FAFAFA;
       float: right;
       img {
-        /* position: absolute; */
-        /* top: 1rem; */
-        /* right: 1rem; */
-        
         width: 2rem;
       }
     }
 
     img {
-      
+      grid-column: 1 / 3;
     }
   }
 }

@@ -7,15 +7,22 @@
     <title>Cookly</title>
 
     <link rel="stylesheet" href="src/css/header-footer.css">
-    <link rel="stylesheet" href="src/css/listing.css">
+    <link rel="stylesheet" href="src/css/recipe.css">
     <script defer type="module" src="/src/js/main.js"></script>
-    <script defer type="module" src="/src/js/discover.js"></script>
+    <script defer type="module" src="/src/js/recipe.js"></script>
   </head>
   <body>
     <header id="main-header"></header>
     <main>
-      <h1>Discover recipes</h1>
-      <ul class="listing discover"></ul>
+      <h1 id="title"></h1>
+      <div>
+        <img id="image" src="" alt="">
+        <div id="instructions"></div>
+      </div>
+      <div>
+        <h2>ingredients:</h2>
+        <ul id="ingredients"></ul>
+      </div>
     </main>
     <footer id="main-footer"></footer>
   </body>
