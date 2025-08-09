@@ -21,19 +21,21 @@ export default class RecipeListing {
   }
 
   async init() {
-    const list = await this.dataSource.getRecipes(this.category);
-
-    if(!Array.isArray(list)) {
-      throw new Error("expected an array of products")
+    let list;
+    if (this.category === "random") {
+      list = await this.dataSource.getRandomRecipes(this.quantity);
+    } else {
+      list = await this.dataSource.getRecipes(this.category);
     }
 
-    this.renderList(list)
+    if (!Array.isArray(list)) {
+      throw new Error("expected an array of recipes")
+    }
+
+    this.renderList(list);
   }
 
   renderList(list) {
-    // const oldList = this.listElement.querySelector("ul")
-    // if (oldList) oldList.remove()
-
     const productList = document.createElement("ul");
     productList.classList.add("listing")
     renderListWithTemplate(recipeCardTemplate, productList, list, this.quantity)

@@ -26,8 +26,6 @@ main {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
-    max-width: 60rem;
-    margin: auto;
     h1 {
       grid-column: 1 / 3;
     }

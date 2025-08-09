@@ -52,6 +52,14 @@ header {
   }
 }
 
+main {
+  padding: 1rem;
+  @media (min-width: 768px) {
+    max-width: 72rem;
+    margin: auto;
+  }
+}
+
 footer {
   background-color: var(--accent-color);
   padding: 1rem;
