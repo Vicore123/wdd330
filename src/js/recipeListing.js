@@ -1,13 +1,15 @@
 import renderListWithTemplate from "./utils"
 
-function recipeCardTemplate(recipe) {
+export function recipeCardTemplate(recipe) { 
   return `
     <li>
-      <a href="../../recipe.html?id=${recipe.id}" class="card-link">
+      <div class="card-link">
         <h2>${recipe.title}</h2>
-        <button id="add-favorites"><img src="../images/favorite.png" alt="add to favorites"></button>
-        <img src="${recipe.image}" alt="${recipe.title}">
-      </a>
+        <button class="add-favorites" data-id="${recipe.id}"><img src="../images/favorite.png" alt="add to favorites"></button>
+        <a href="../../recipe.html?id=${recipe.id}">
+          <img src="${recipe.image}" alt="${recipe.title}">
+        </a>
+      </div>
     </li>
   `
 }

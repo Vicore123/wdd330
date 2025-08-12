@@ -28,10 +28,22 @@ export default function renderListWithTemplate(template, parentElement, list, qu
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("partials/header.html");
   const footerTemplate = await loadTemplate("partials/footer.html");
+  const favoritesTemplate = await loadTemplate("partials/favorites.html");
 
   const headerElement = document.querySelector("#main-header");
   const footerElement = document.querySelector("#main-footer");
+  const favoritesElement = document.querySelector("#favorites");
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+  renderWithTemplate(favoritesTemplate, favoritesElement);
+}
+
+export function getLocalStorage(key) {
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : [];
+}
+
+export function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }

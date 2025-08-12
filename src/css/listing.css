@@ -1,27 +1,30 @@
 @import './root.css';
 
 
-.listing {
+.listing, #favorites-list{
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  a {
+  .card-link {
     color: #333333;
     width: 20rem;
     padding: 1rem;
     margin: 1rem;
     display: grid;
     align-items: start;
-    grid-template-columns: 15rem 5rem;
+    grid-template-columns: 8fr 1fr;
     grid-template-rows: 3.5rem;
 
-    #add-favorites {
+    .add-favorites, .remove-favorite{
+      cursor: pointer;
       border: none;
       background-color: #FAFAFA;
-      float: right;
       img {
         width: 2rem;
       }
+    }
+    .remove-favorite {
+      font-size: 1.5rem;
     }
 
     img {

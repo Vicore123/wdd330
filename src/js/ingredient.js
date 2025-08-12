@@ -15,23 +15,6 @@ function getFirstTwoWords(text) {
   return text.split(" ").slice(0, 2).join(" ") + " food";
 }
 
-
-async function getIngredientImageFromUnsplash(query) {
-  try {
-    const response = await fetch(
-      `https://api.unsplash.com/search/photos?page=1&query=${encodeURIComponent(query)}&client_id=${unsplashKey}`
-    );
-    const data = await response.json();
-    if (data.results && data.results.length > 0) {
-      return data.results[0].urls.small;
-    }
-    return null;
-  } catch (error) {
-    console.error("Error fetching image from Unsplash:", error);
-    return null;
-  }
-}
-
 async function loadIngredientInfo() {
   const id = getIngredientIdFromUrl();
   if (!id) {
@@ -52,12 +35,9 @@ async function loadIngredientInfo() {
 
     titleEl.textContent = data.original;
 
-    const searchQuery = getFirstTwoWords(data.name);
-    const imageUrl = await getIngredientImageFromUnsplash(searchQuery);
-
-    if (imageUrl) {
-      imageEl.src = imageUrl;
-      imageEl.alt = data.name;
+    if (data.image) {
+      imageEl.src = `https://spoonacular.com/cdn/ingredients_500x500/${data.image}`;
+      imageEl.alt = data.name || "Ingredient image";
     } else {
       imageEl.src = "";
       imageEl.alt = "Image not available";
@@ -94,5 +74,6 @@ async function loadIngredientInfo() {
     titleEl.textContent = "Error loading ingredient information.";
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", loadIngredientInfo);

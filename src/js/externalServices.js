@@ -56,38 +56,25 @@ export default class ExternalServices {
     }
   }
 
-  async getIngredientInfo(ingredientName) {
-    if (!this.UNSPLASH_ACCESS_KEY) {
-      console.warn("Unsplash Access Key não definida.");
-      return {
-        name: ingredientName,
-        imageUrl: null,
-      };
-    }
-
+  async getIngredientInfo(ingredientId) {
     try {
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(ingredientName)}&client_id=${this.UNSPLASH_ACCESS_KEY}&per_page=1`
+        `https://api.spoonacular.com/food/ingredients/${ingredientId}/information?amount=1&apiKey=${this.apiKey}`
       );
-      const data = await response.json();
+      const ingredient = await response.json();
 
-      if (data.results && data.results.length > 0) {
-        return {
-          name: ingredientName,
-          imageUrl: data.results[0].urls.small,
-        };
-      } else {
-        return {
-          name: ingredientName,
-          imageUrl: null,
-        };
-      }
-    } catch (error) {
-      console.error("Erro ao buscar imagem no Unsplash:", error);
       return {
-        name: ingredientName,
-        imageUrl: null,
+        name: ingredient.name,
+        imageUrl: `https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`
+      };
+    } catch (error) {
+      console.error("Erro ao buscar ingrediente:", error);
+      return {
+        name: null,
+        imageUrl: null
       };
     }
   }
+
+
 }
