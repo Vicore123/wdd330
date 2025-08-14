@@ -8,9 +8,8 @@ async function convertToJson(res) {
 }
 
 export default class ExternalServices {
-  constructor(apiKey, UNSPLASH_ACCESS_KEY) {
+  constructor(apiKey) {
     this.apiKey = apiKey;
-    this.UNSPLASH_ACCESS_KEY = UNSPLASH_ACCESS_KEY;
   }
 
   async getRecipes(query) {
@@ -64,17 +63,23 @@ export default class ExternalServices {
       const ingredient = await response.json();
 
       return {
-        name: ingredient.name,
-        imageUrl: `https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`
+        name: ingredient.original || ingredient.name,
+        imageUrl: ingredient.image
+          ? `https://spoonacular.com/cdn/ingredients_500x500/${ingredient.image}`
+          : null,
+        caloricBreakdown: ingredient.nutrition
+          ? ingredient.nutrition.caloricBreakdown
+          : null,
+        nutrition: ingredient.nutrition || null
       };
     } catch (error) {
       console.error("Erro ao buscar ingrediente:", error);
       return {
         name: null,
-        imageUrl: null
+        imageUrl: null,
+        caloricBreakdown: null,
+        nutrition: null
       };
     }
   }
-
-
 }

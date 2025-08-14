@@ -1,5 +1,7 @@
+import ExternalServices from "./externalServices.js";
+
 const apiKey = import.meta.env.VITE_APIKEY;
-const unsplashKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+const service = new ExternalServices(apiKey);
 
 const titleEl = document.getElementById("title");
 const imageEl = document.getElementById("image");
@@ -11,10 +13,6 @@ function getIngredientIdFromUrl() {
   return params.get("id");
 }
 
-function getFirstTwoWords(text) {
-  return text.split(" ").slice(0, 2).join(" ") + " food";
-}
-
 async function loadIngredientInfo() {
   const id = getIngredientIdFromUrl();
   if (!id) {
@@ -23,20 +21,17 @@ async function loadIngredientInfo() {
   }
 
   try {
-    const response = await fetch(
-      `https://api.spoonacular.com/food/ingredients/${id}/information?amount=1&apiKey=${apiKey}`
-    );
-    const data = await response.json();
+    const data = await service.getIngredientInfo(id);
 
-    if (!data.original || !data.name) {
+    if (!data.name) {
       titleEl.textContent = "Ingredient not found.";
       return;
     }
 
-    titleEl.textContent = data.original;
+    titleEl.textContent = data.name;
 
-    if (data.image) {
-      imageEl.src = `https://spoonacular.com/cdn/ingredients_500x500/${data.image}`;
+    if (data.imageUrl) {
+      imageEl.src = data.imageUrl;
       imageEl.alt = data.name || "Ingredient image";
     } else {
       imageEl.src = "";
@@ -74,6 +69,5 @@ async function loadIngredientInfo() {
     titleEl.textContent = "Error loading ingredient information.";
   }
 }
-
 
 document.addEventListener("DOMContentLoaded", loadIngredientInfo);
